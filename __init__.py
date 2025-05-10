@@ -32,7 +32,7 @@ def main(mytimer: func.TimerRequest) -> None:
         conn.commit()
         cursor.close()
         conn.close()
-        logging.info("Proceso finalizado correctamente.")
+        logging.info("Proceso finalizado correctamente gaa.")
 
     except Exception as e:
         logging.error(f"Error al procesar clientes: {str(e)}")
