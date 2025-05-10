@@ -24,18 +24,22 @@ def main(mytimer: func.TimerRequest) -> None:
     
     try:
         # Conexión a la base de datos MySQL
+        logging.info(f"Intentando conectar a MySQL en {db_host}...")
         conn = pymysql.connect(
             host=db_host,
             user=db_user,
             password=db_password,
             db=db_name,
+            connect_timeout=10,
             cursorclass=pymysql.cursors.DictCursor
         )
+        logging.info("¡Conexión establecida con éxito!")
         cursor = conn.cursor()
 
         # Buscar clientes con bienvenida no enviada
         cursor.execute("SELECT id, nombre, correo FROM clientes WHERE bienvenida_enviada = FALSE")
         clientes = cursor.fetchall()
+        logging.info(f"Consulta ejecutada. Encontrados {len(clientes)} clientes para procesar")
         
         # Verificar si hay clientes para procesar
         if not clientes:
@@ -72,27 +76,3 @@ def main(mytimer: func.TimerRequest) -> None:
                 pass
 
     logging.info("Proceso finalizado correctamente.")
-# import logging
-# import azure.functions as func
-# import datetime
-
-# def main(mytimer: func.TimerRequest) -> None:
-#     utc_timestamp = datetime.datetime.utcnow().replace(
-#         tzinfo=datetime.timezone.utc).isoformat()
-    
-#     logging.info(f'Python timer trigger function ejecutada en: {utc_timestamp}')
-#     logging.info(f'¡PRUEBA EXITOSA! La función timer está funcionando')
-    
-#     if mytimer.past_due:
-#         logging.info('The timer isasd past due!')
-    
-#     try:
-#         # Código simplificado para prueba - sin conexión a DB
-#         logging.info("Simulando conexión a la base de datos...")
-#         logging.info("Procesamiento completado con éxito!")
-        
-#     except Exception as e:
-#         logging.error(f"Error en la ejecución: {str(e)}")
-        
-#     finally:
-#         logging.info("Proceso finalizado correctamente.")
