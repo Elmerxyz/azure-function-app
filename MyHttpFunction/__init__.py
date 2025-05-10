@@ -1,15 +1,16 @@
 import logging
 import pymysql
 import azure.functions as func
-import os
 
 def main(mytimer: func.TimerRequest) -> None:
-    db_host = os.getenv('20.106.206.184')
-    db_user = os.getenv('adminuser')
-    db_password = os.getenv('TuPasswordSegura')
-    db_name = os.getenv('productos_db')
+    # Definir directamente los valores de conexión a la base de datos
+    db_host = '20.106.206.184'  # Dirección del servidor de base de datos
+    db_user = 'adminuser'  # Nombre de usuario de la base de datos
+    db_password = 'TuPasswordSegura'  # Contraseña de la base de datos
+    db_name = 'productos_db'  # Nombre de la base de datos
 
     try:
+        # Conexión a la base de datos MySQL
         conn = pymysql.connect(
             host=db_host,
             user=db_user,
@@ -19,9 +20,11 @@ def main(mytimer: func.TimerRequest) -> None:
         )
         cursor = conn.cursor()
 
+        # Buscar clientes con bienvenida no enviada
         cursor.execute("SELECT id, nombre, correo FROM clientes WHERE bienvenida_enviada = FALSE")
         clientes = cursor.fetchall()
 
+        # Enviar bienvenida y actualizar la base de datos
         for cliente in clientes:
             id_cliente = cliente['id']
             nombre = cliente['nombre']
@@ -29,10 +32,16 @@ def main(mytimer: func.TimerRequest) -> None:
             logging.info(f"Bienvenida enviada a {nombre} ({correo})")
             cursor.execute("UPDATE clientes SET bienvenida_enviada = TRUE WHERE id = %s", (id_cliente,))
 
+        # Confirmar los cambios
         conn.commit()
-        cursor.close()
-        conn.close()
-        logging.info("Proceso finalizado correctamente gaa.")
 
     except Exception as e:
         logging.error(f"Error al procesar clientes: {str(e)}")
+
+    finally:
+        # Cerrar la conexión de forma segura
+        if conn:
+            cursor.close()
+            conn.close()
+
+    logging.info("Proceso finalizado correctamente.")
