@@ -8,7 +8,8 @@ def main(mytimer: func.TimerRequest) -> None:
     db_user = 'adminuser'  # Nombre de usuario de la base de datos
     db_password = 'TuPasswordSegura'  # Contraseña de la base de datos
     db_name = 'productos_db'  # Nombre de la base de datos
-
+    print("Iniciando el proceso de envío de correos...")
+    logging.info("Iniciando el proceso de envío de correos...")
     try:
         # Conexión a la base de datos MySQL
         conn = pymysql.connect(
