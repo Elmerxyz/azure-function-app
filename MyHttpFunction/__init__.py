@@ -7,7 +7,7 @@ def main(mytimer: func.TimerRequest) -> None:
     db_host = '20.106.206.184'  # Dirección del servidor de base de datos
     db_user = 'adminuser'  # Nombre de usuario de la base de datos
     db_password = 'TuPasswordSegura'  # Contraseña de la base de datos
-    db_name = 'clients_db'  # Nombre de la base de datos
+    db_name = 'clientes_db'  # Nombre de la base de datos
     print("Iniciando el proceso de envío de correos...")
     logging.info("Iniciando el proceso de envío de correos...")
     try:
