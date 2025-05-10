@@ -6,7 +6,8 @@
       "type": "httpTrigger",
       "direction": "in",
       "authLevel": "function",
-      "methods": ["get", "post"]
+      "methods": ["get", "post"],
+      "schedule": "0 */5 * * * *"
     },
     {
       "name": "$return",
