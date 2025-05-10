@@ -84,7 +84,7 @@ def main(mytimer: func.TimerRequest) -> None:
     logging.info(f'¡PRUEBA EXITOSA! La función timer está funcionando')
     
     if mytimer.past_due:
-        logging.info('The timer is past due!')
+        logging.info('The timer isasd past due!')
     
     try:
         # Código simplificado para prueba - sin conexión a DB
