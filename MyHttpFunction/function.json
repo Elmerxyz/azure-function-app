@@ -6,18 +6,6 @@
       "type": "timerTrigger",
       "direction": "in",
       "schedule": "0 */1 * * * *"
-    },
-    {
-      "name": "req",
-      "type": "httpTrigger",
-      "direction": "in",
-      "authLevel": "function",
-      "methods": ["get", "post"]
-    },
-    {
-      "name": "$return",
-      "type": "http",
-      "direction": "out"
     }
   ]
 }
