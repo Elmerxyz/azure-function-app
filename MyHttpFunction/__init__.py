@@ -75,4 +75,4 @@ def main(mytimer: func.TimerRequest) -> None:
             except:
                 pass
 
-    logging.info("Proceso finalizado correctamente.")
+    logging.info("Proceso finalizado cfsdforrectamente.")
