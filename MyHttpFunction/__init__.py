@@ -36,7 +36,7 @@ def main(mytimer: func.TimerRequest) -> None:
         conn.commit()
 
     except Exception as e:
-        logging.error(f"Error al procesar clientes: {str(e)}")
+        logging.error(f"Error al procesxascar clientes: {str(e)}")
 
     finally:
         # Cerrar la conexión de forma segura
