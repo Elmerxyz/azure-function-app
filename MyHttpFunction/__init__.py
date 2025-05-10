@@ -7,7 +7,8 @@ def main(mytimer: func.TimerRequest) -> None:
     utc_timestamp = datetime.datetime.utcnow().replace(
         tzinfo=datetime.timezone.utc).isoformat()
     
-    logging.info(f'Python timer trigger function ran at {utc_timestamp}')
+    logging.info(f'Python timer trigger function ejecutada en: {utc_timestamp}')
+    logging.info(f'¡PRUEBA EXITOSA! La función timer está funcionando')
     
     if mytimer.past_due:
         logging.info('The timer is past due!')
