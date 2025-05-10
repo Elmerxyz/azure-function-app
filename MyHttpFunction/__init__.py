@@ -55,7 +55,8 @@ def main(mytimer: func.TimerRequest) -> None:
         logging.info(f"Bienvenidas enviadas a {len(clientes)} clientes")
 
     except Exception as e:
-        logging.error(f"Error al procesar clientes: {str(e)}")
+        error_detallado = f"Error al procesar clientes: {str(e)}, Tipo de error: {type(e).__name__}"
+        logging.error(error_detallado)
         # Si hubo un error en la actualización, hacer rollback
         if conn:
             conn.rollback()
